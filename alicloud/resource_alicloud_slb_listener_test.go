@@ -189,7 +189,34 @@ resource "alicloud_slb_listener" "http" {
     retrive_slb_ip = true
     retrive_slb_id = true
   }
+  acl_status = "on"
+  acl_type   = "white"
+  acl_id     = "${alicloud_slb_acl.acl.id}"
 }
+
+
+variable "name" {
+	default = "tf-test-http-listener-acl"
+}
+variable "ip_version" {
+	default = "ipv4"
+}
+
+resource "alicloud_slb_acl" "acl" {
+  name = "${var.name}"
+  ip_version = "${var.ip_version}"
+  entrys = [
+    {
+      entry="10.10.10.0/24"
+      comment="first"
+    },
+    {
+      entry="168.10.10.0/24"
+      comment="second"
+    }
+  ]
+}
+
 `
 
 const testAccSlbListenerTcp = `
@@ -214,7 +241,33 @@ resource "alicloud_slb_listener" "tcp" {
   health_check_timeout = 8
   health_check_connect_port = 20
   health_check_uri = "/console"
+  acl_status = "on"
+  acl_type   = "black"
+  acl_id     = "${alicloud_slb_acl.acl.id}"
 }
+
+variable "name" {
+	default = "tf-test-tcp-listener-acl"
+}
+variable "ip_version" {
+	default = "ipv4"
+}
+
+resource "alicloud_slb_acl" "acl" {
+  name = "${var.name}"
+  ip_version = "${var.ip_version}"
+  entrys = [
+    {
+      entry="10.10.10.0/24"
+      comment="first"
+    },
+    {
+      entry="168.10.10.0/24"
+      comment="second"
+    }
+  ]
+}
+
 `
 
 const testAccSlbListenerUdp = `
@@ -237,5 +290,31 @@ resource "alicloud_slb_listener" "udp" {
   health_check_interval = 4
   health_check_timeout = 8
   health_check_connect_port = 20
+  acl_status = "on"
+  acl_type   = "white"
+  acl_id     = "${alicloud_slb_acl.acl.id}"
 }
+
+variable "name" {
+	default = "tf-test-udp-listener-acl"
+}
+variable "ip_version" {
+	default = "ipv4"
+}
+
+resource "alicloud_slb_acl" "acl" {
+  name = "${var.name}"
+  ip_version = "${var.ip_version}"
+  entrys = [
+    {
+      entry="10.10.10.0/24"
+      comment="first"
+    },
+    {
+      entry="168.10.10.0/24"
+      comment="second"
+    }
+  ]
+}
+
 `

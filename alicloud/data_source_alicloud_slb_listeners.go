@@ -68,6 +68,18 @@ func dataSourceAlicloudSlbListeners() *schema.Resource {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
+						"acl_status": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+						"acl_type": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+						"acl_id": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
 						"master_slave_server_group_id": {
 							Type:     schema.TypeString,
 							Computed: true,
@@ -247,6 +259,9 @@ func slbListenersDescriptionAttributes(d *schema.ResourceData, listeners []slb.L
 				mapping["bandwidth"] = resp.Bandwidth
 				mapping["scheduler"] = resp.Scheduler
 				mapping["server_group_id"] = resp.VServerGroupId
+				mapping["acl_status"] = resp.AclStatus
+				mapping["acl_type"] = resp.AclType
+				mapping["acl_id"] = resp.AclId
 				mapping["sticky_session"] = resp.StickySession
 				mapping["sticky_session_type"] = resp.StickySessionType
 				mapping["cookie_timeout"] = resp.CookieTimeout
@@ -280,6 +295,9 @@ func slbListenersDescriptionAttributes(d *schema.ResourceData, listeners []slb.L
 				mapping["bandwidth"] = resp.Bandwidth
 				mapping["scheduler"] = resp.Scheduler
 				mapping["server_group_id"] = resp.VServerGroupId
+				mapping["acl_status"] = resp.AclStatus
+				mapping["acl_type"] = resp.AclType
+				mapping["acl_id"] = resp.AclId
 				mapping["sticky_session"] = resp.StickySession
 				mapping["sticky_session_type"] = resp.StickySessionType
 				mapping["cookie_timeout"] = resp.CookieTimeout
@@ -314,6 +332,9 @@ func slbListenersDescriptionAttributes(d *schema.ResourceData, listeners []slb.L
 				mapping["bandwidth"] = resp.Bandwidth
 				mapping["scheduler"] = resp.Scheduler
 				mapping["server_group_id"] = resp.VServerGroupId
+				mapping["acl_status"] = resp.AclStatus
+				mapping["acl_type"] = resp.AclType
+				mapping["acl_id"] = resp.AclId
 				mapping["master_slave_server_group_id"] = resp.MasterSlaveServerGroupId
 				mapping["persistence_timeout"] = resp.PersistenceTimeout
 				mapping["established_timeout"] = resp.EstablishedTimeout
@@ -341,6 +362,9 @@ func slbListenersDescriptionAttributes(d *schema.ResourceData, listeners []slb.L
 				mapping["bandwidth"] = resp.Bandwidth
 				mapping["scheduler"] = resp.Scheduler
 				mapping["server_group_id"] = resp.VServerGroupId
+				mapping["acl_status"] = resp.AclStatus
+				mapping["acl_type"] = resp.AclType
+				mapping["acl_id"] = resp.AclId
 				mapping["master_slave_server_group_id"] = resp.MasterSlaveServerGroupId
 				mapping["persistence_timeout"] = resp.PersistenceTimeout
 				mapping["health_check"] = resp.HealthCheck
